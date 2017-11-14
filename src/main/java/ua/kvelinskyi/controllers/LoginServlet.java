@@ -15,12 +15,16 @@ import java.util.List;
 
 @Controller
 public class LoginServlet {
-    @Autowired
+
     private Logger log;
     @Autowired
     FormValidator formValidator;
     @Autowired
     UserServiceImpl userServiceImpl;
+    @Autowired
+    public void setLog(Logger log) {
+        this.log = log;
+    }
 
     @RequestMapping(value = "loginPage", method = RequestMethod.GET)
     public String manageLoginPage(Model model) {
