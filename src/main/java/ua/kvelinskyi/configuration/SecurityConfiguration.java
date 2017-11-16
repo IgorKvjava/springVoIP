@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,6 +15,7 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 import ua.kvelinskyi.controllers.error.CustomAccessDeniedHandler;
 
 @Configuration
+@EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -28,11 +30,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests().antMatchers("/").permitAll()
-                .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
-                .antMatchers("/confidential/**").access("hasRole('ROLE_SUPERADMIN')")
-                .antMatchers("/console/**").permitAll()
+                .antMatchers("/admin/**","/mainUserPage/**").access("hasRole('ADMIN')")
+                .antMatchers("/user/**").access("hasRole('USER')")
+               // .antMatchers("/console/**").permitAll()
                 .and().formLogin()
                 .loginPage("/loginPage")
+                .permitAll()
+                .and()
+                .logout()
                 .permitAll()
                 .and().exceptionHandling().accessDeniedHandler(accessDeniedHandler())
                 ;
@@ -58,4 +63,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordencoder() {
         return new BCryptPasswordEncoder();
     }
+
+    /*@Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+
+        auth.inMemoryAuthentication()
+                .withUser("user1").password("1").roles("USER")
+                .and()
+                .withUser("admin").password("$2a$10$F3N38T.RB8OQXUUUxAMMh.xBLbFeHQ3iNxDym8yUGsQOmFrE2FLqC").roles("ADMIN");
+    }*/
 }

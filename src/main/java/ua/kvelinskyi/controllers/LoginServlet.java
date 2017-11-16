@@ -3,6 +3,7 @@ package ua.kvelinskyi.controllers;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
@@ -15,7 +16,7 @@ import ua.kvelinskyi.service.impl.UserServiceImpl;
 import java.security.Principal;
 import java.util.List;
 
-@Controller
+@RestController
 public class LoginServlet {
 
     private Logger log;
@@ -29,49 +30,50 @@ public class LoginServlet {
     @Autowired
     UserServiceImpl userServiceImpl;
 
-
-    @RequestMapping(value = "loginPage", method = RequestMethod.GET)
-    public String manageLoginPage(Model model) {
-        return "login";
-    }
-    @RequestMapping(value = "infoPage", method = RequestMethod.GET)
-    public String manageInfoPage(Model model) {
-        return "info";
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public ModelAndView getIndex() {
+        ModelAndView modelAndView = new ModelAndView();
+        log.info("IndexController has started !");
+        modelAndView.setViewName("index");
+        return modelAndView;
     }
 
+    @RequestMapping(value = "/loginPage", method = RequestMethod.GET)
+    public ModelAndView getLogin() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("loginPage");
+        return modelAndView;
+    }
 
-    @RequestMapping(value = "mainPageUser", method = RequestMethod.POST)
-    public ModelAndView doMainPageUser(@RequestParam("login") String login,
-                                       @RequestParam("password") String password
-   , Authentication loggedUser) {
+    @RequestMapping(value = "/infoPage", method = RequestMethod.GET)
+    public ModelAndView getInfoPage() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("info");
+        return modelAndView;
+    }
+
+
+    @RequestMapping(value = "/mainUserPage**", method = RequestMethod.POST)
+    public ModelAndView getMainUserPage(Principal loggedUser) {
         ModelAndView mod = new ModelAndView();
-        User user = userServiceImpl.getByLoginAndName(login, password);
-        if (user != null) {
-            mod.addObject("user", user);
-
-            if ("admin".equals(user.getRole())) {
                 log.info("public class LoginServlet--RequestMapping --mainPageUser ADMIN");
                 List<User> listAllUsers = userServiceImpl.getAll();
                 mod.addObject("listAllUsers", listAllUsers);
                 mod.setViewName("/admin/usersEditData");
-            } else {
-                mod.setViewName("/user/mainUserPage");
-            }
-        } else {
-            mod.setViewName("index");
-        }
         return mod;
     }
 
-    @RequestMapping(value = "signUp", method = RequestMethod.GET)
-    public String manageRegistrationPage(Model model) {
+    @RequestMapping(value = "/signUp", method = RequestMethod.GET)
+    public ModelAndView getRegistrationPage() {
         User user = new User();
-        user.setUserName("imy");
-        model.addAttribute("user", user);
-        return "registration";
+        ModelAndView modelAndView = new ModelAndView();
+        log.info("signUp has started !");
+        modelAndView.setViewName("registration");
+        modelAndView.addObject("user", user);
+        return modelAndView;
     }
 //TODO change registration
-    @RequestMapping(value = "registration", method = RequestMethod.POST)
+    @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public ModelAndView doRegistrationUser(@RequestParam("login") String login,
                                            @RequestParam("password") String password)
     {
@@ -82,12 +84,13 @@ public class LoginServlet {
         } else {
             User user = new User();
             user.setLogin(login);
-            user.setPassword(password);
-            user.setRole("user");
+            String cryptedPassword = new BCryptPasswordEncoder().encode(password);
+            user.setPassword(cryptedPassword);
+            user.setRole("USER");
             user.setUserName("enter your name");
             user = userServiceImpl.addUser(user);
             mod.addObject("user", user);
-            mod.setViewName("/user/userEditDataPage");
+            mod.setViewName("index");
         }
         return mod;
     }

@@ -8,13 +8,14 @@ import org.h2.server.web.WebServlet;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Configuration
 //@EnableWebMvc
 //@ComponentScan({"ua.ua.kvelinskyi"})
 
 //TODO implements WebMvcConfigurer for spring-framework-version 5.0.1.RELEASE
-public class WebConfiguration {
+public class WebConfiguration extends WebMvcConfigurerAdapter {
 
     @Bean
     ServletRegistrationBean h2servletRegistration(){

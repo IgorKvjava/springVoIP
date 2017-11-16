@@ -30,7 +30,7 @@ public class RepositoryConfiguration {
 
         JdbcDaoImpl jdbcDao = new JdbcDaoImpl();
         jdbcDao.setDataSource(dataSource);
-        jdbcDao.setUsersByUsernameQuery("select login,password from users where login=?");
+        jdbcDao.setUsersByUsernameQuery("select login,password, enebeled from users where login=?");
         jdbcDao.setAuthoritiesByUsernameQuery(
                 "select login, role from users where login=?");
         return jdbcDao;
