@@ -17,13 +17,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 //TODO implements WebMvcConfigurer for spring-framework-version 5.0.1.RELEASE
 public class WebConfiguration extends WebMvcConfigurerAdapter {
 
-    @Bean
+    /*@Bean
     ServletRegistrationBean h2servletRegistration(){
         ServletRegistrationBean registrationBean = new ServletRegistrationBean( new WebServlet());
         registrationBean.addUrlMappings("/console/*");
         return registrationBean;
     }
-
+*/
     @Bean
     public Logger logger(){
         return LogManager.getLogger("ua.kvelinskyi.loggers.core");

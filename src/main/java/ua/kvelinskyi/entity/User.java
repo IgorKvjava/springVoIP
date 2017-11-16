@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity(name = "springUser")
+@Entity
 @Table(name = "users", schema = "phonebase")
 public class User {
     private int id;
@@ -12,15 +12,17 @@ public class User {
     private String password;
     private String userName;
     private String role;
+    private String enabled;
 
     public User() {
     }
 
-    public User(String login, String password, String userName, String role) {
+    public User(String login, String password, String userName, String role, String enabled) {
         this.login = login;
         this.password = password;
         this.userName = userName;
         this.role = role;
+        this.enabled = enabled;
     }
 
     @Id
@@ -80,6 +82,16 @@ public class User {
         this.role = role;
     }
 
+    @Basic
+    @Column(name = "enabled")
+    public String getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(String enabled) {
+        this.enabled = enabled;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -88,7 +100,8 @@ public class User {
                 ", password='" + password + '\'' +
                 ", userName='" + userName + '\'' +
                 ", role='" + role + '\'' +
-                ", phoneBookList=" + phoneBookEntityList +
+                ", enabled='" + enabled + '\'' +
+                ", phoneBookEntityList=" + phoneBookEntityList +
                 '}';
     }
 

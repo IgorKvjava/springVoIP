@@ -30,7 +30,7 @@ public class LoginServlet {
     @Autowired
     UserServiceImpl userServiceImpl;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/")
     public ModelAndView getIndex() {
         ModelAndView modelAndView = new ModelAndView();
         log.info("IndexController has started !");
@@ -38,7 +38,7 @@ public class LoginServlet {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/loginPage", method = RequestMethod.GET)
+    @RequestMapping(value = "/loginPage")
     public ModelAndView getLogin() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("loginPage");
@@ -53,7 +53,7 @@ public class LoginServlet {
     }
 
 
-    @RequestMapping(value = "/mainUserPage**", method = RequestMethod.POST)
+    @RequestMapping(value = "/mainUserPage")
     public ModelAndView getMainUserPage(Principal loggedUser) {
         ModelAndView mod = new ModelAndView();
                 log.info("public class LoginServlet--RequestMapping --mainPageUser ADMIN");

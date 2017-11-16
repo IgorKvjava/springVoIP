@@ -15,7 +15,7 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 import ua.kvelinskyi.controllers.error.CustomAccessDeniedHandler;
 
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity(debug =true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -29,17 +29,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.authorizeRequests().antMatchers("/").permitAll()
-                .antMatchers("/admin/**","/mainUserPage/**").access("hasRole('ADMIN')")
-                .antMatchers("/user/**").access("hasRole('USER')")
+        httpSecurity.csrf().disable().authorizeRequests()
+               .antMatchers("/*").permitAll()
+                .antMatchers("/admin/**","/mainUserPage/**").access("hasRole('ROLE_ADMIN')")
+//                .antMatchers("/user/**").access("hasRole('USER')")
                // .antMatchers("/console/**").permitAll()
                 .and().formLogin()
-                .loginPage("/loginPage")
+               .loginPage("/loginPage")
                 .permitAll()
                 .and()
                 .logout()
                 .permitAll()
-                .and().exceptionHandling().accessDeniedHandler(accessDeniedHandler())
+//                .and().exceptionHandling().accessDeniedHandler(accessDeniedHandler())
                 ;
 
        /* httpSecurity.csrf().disable();
@@ -56,7 +57,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         // Specific Authentication implementation that retrieves user details from a UserDetailsService.
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(userDetailsService);
-        authProvider.setPasswordEncoder(passwordencoder());
+//        authProvider.setPasswordEncoder(passwordencoder());
         return authProvider;
     }
     @Bean(name = "passwordEncoder")
