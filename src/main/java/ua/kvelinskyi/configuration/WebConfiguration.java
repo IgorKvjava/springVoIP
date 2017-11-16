@@ -25,8 +25,10 @@ public class WebConfiguration {
 
     @Bean
     public Logger logger(){
-        return LogManager.getLogger("ua.ua.kvelinskyi.loggers.core");
+        return LogManager.getLogger("ua.kvelinskyi.loggers.core");
     }
+
+
 
     /*@Bean
     public ReloadableResourceBundleMessageSource messageSource() {

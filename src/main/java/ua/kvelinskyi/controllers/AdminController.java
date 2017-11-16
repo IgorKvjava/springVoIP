@@ -11,8 +11,12 @@ import ua.kvelinskyi.service.impl.UserServiceImpl;
 @Controller
 public class AdminController {
 
-    @Autowired
     private Logger log;
+    //TODO Autowired
+    @Autowired
+    public void setLog(Logger log) {
+        this.log = log;
+    }
 
     @Autowired
     FormValidator formValidator;

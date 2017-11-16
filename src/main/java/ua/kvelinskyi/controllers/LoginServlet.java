@@ -2,6 +2,7 @@ package ua.kvelinskyi.controllers;
 
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
@@ -11,34 +12,43 @@ import org.springframework.web.servlet.ModelAndView;
 import ua.kvelinskyi.entity.User;
 import ua.kvelinskyi.service.impl.UserServiceImpl;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
 public class LoginServlet {
 
     private Logger log;
-    @Autowired
-    FormValidator formValidator;
-    @Autowired
-    UserServiceImpl userServiceImpl;
+    //TODO Autowired
     @Autowired
     public void setLog(Logger log) {
         this.log = log;
     }
+    @Autowired
+    FormValidator formValidator;
+    @Autowired
+    UserServiceImpl userServiceImpl;
+
 
     @RequestMapping(value = "loginPage", method = RequestMethod.GET)
     public String manageLoginPage(Model model) {
         return "login";
     }
+    @RequestMapping(value = "infoPage", method = RequestMethod.GET)
+    public String manageInfoPage(Model model) {
+        return "info";
+    }
+
 
     @RequestMapping(value = "mainPageUser", method = RequestMethod.POST)
     public ModelAndView doMainPageUser(@RequestParam("login") String login,
                                        @RequestParam("password") String password
-    ) {
+   , Authentication loggedUser) {
         ModelAndView mod = new ModelAndView();
         User user = userServiceImpl.getByLoginAndName(login, password);
         if (user != null) {
             mod.addObject("user", user);
+
             if ("admin".equals(user.getRole())) {
                 log.info("public class LoginServlet--RequestMapping --mainPageUser ADMIN");
                 List<User> listAllUsers = userServiceImpl.getAll();

@@ -1,19 +1,61 @@
 package ua.kvelinskyi.configuration;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.AccessDeniedHandler;
+import ua.kvelinskyi.controllers.error.CustomAccessDeniedHandler;
 
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Override
-    protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.authorizeRequests().antMatchers("/").permitAll().and()
-                .authorizeRequests().antMatchers("/console/**").permitAll();
+    @Autowired
+    UserDetailsService userDetailsService;
 
-        httpSecurity.csrf().disable();
-        httpSecurity.headers().frameOptions().disable();
+    @Autowired
+    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
+        //   auth.userDetailsService(userDetailsService).passwordEncoder(passwordencoder());;
+        auth.authenticationProvider(authProvider());
     }
 
+    @Override
+    protected void configure(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity.authorizeRequests().antMatchers("/").permitAll()
+                .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/confidential/**").access("hasRole('ROLE_SUPERADMIN')")
+                .antMatchers("/console/**").permitAll()
+                .and().formLogin()
+                .loginPage("/loginPage")
+                .permitAll()
+                .and().exceptionHandling().accessDeniedHandler(accessDeniedHandler())
+                ;
+
+       /* httpSecurity.csrf().disable();
+        httpSecurity.headers().frameOptions().disable();*/
+    }
+
+    @Bean
+    public AccessDeniedHandler accessDeniedHandler() {
+        return new CustomAccessDeniedHandler();
+    }
+
+    @Bean
+    public DaoAuthenticationProvider authProvider() {
+        // Specific Authentication implementation that retrieves user details from a UserDetailsService.
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailsService);
+        authProvider.setPasswordEncoder(passwordencoder());
+        return authProvider;
+    }
+    @Bean(name = "passwordEncoder")
+    public PasswordEncoder passwordencoder() {
+        return new BCryptPasswordEncoder();
+    }
 }

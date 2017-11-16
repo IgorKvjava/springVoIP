@@ -86,24 +86,40 @@
         <!--End of junit -->
 
         <!-- slf4j2 -->
-        <dependency>
+        <!--<dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
-            <!--<version>${slf4j2-version}</version>-->
+            &lt;!&ndash;<version>${slf4j2-version}</version>&ndash;&gt;
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
-            <!--<version>${slf4j2-version}</version>-->
+            &lt;!&ndash;<version>${slf4j2-version}</version>&ndash;&gt;
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-jcl</artifactId>
-            <!--<version>2.5</version>-->
-        </dependency>
+            &lt;!&ndash;<version>2.5</version>&ndash;&gt;
+        </dependency>-->
         <!--slf4j2 end-->
 
+        <!-- slf4j2 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j2</artifactId>
+        </dependency>
+        <!--slf4j2 end-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>

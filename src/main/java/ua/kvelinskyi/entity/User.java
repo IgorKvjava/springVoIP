@@ -69,6 +69,7 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "user")
     private List<PhoneBook> phoneBookEntityList = new ArrayList<>();
 
+
     @Basic
     @Column(name = "role")
     public String getRole() {
