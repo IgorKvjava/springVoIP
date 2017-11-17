@@ -11,17 +11,15 @@ public class User {
     private String login;
     private String password;
     private String userName;
-    private String role;
     private String enabled;
 
     public User() {
     }
 
-    public User(String login, String password, String userName, String role, String enabled) {
+    public User(String login, String password, String userName, String enabled) {
         this.login = login;
         this.password = password;
         this.userName = userName;
-        this.role = role;
         this.enabled = enabled;
     }
 
@@ -71,17 +69,6 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "user")
     private List<PhoneBook> phoneBookEntityList = new ArrayList<>();
 
-
-    @Basic
-    @Column(name = "role")
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
     @Basic
     @Column(name = "enabled")
     public String getEnabled() {
@@ -99,7 +86,6 @@ public class User {
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
                 ", userName='" + userName + '\'' +
-                ", role='" + role + '\'' +
                 ", enabled='" + enabled + '\'' +
                 ", phoneBookEntityList=" + phoneBookEntityList +
                 '}';
@@ -116,8 +102,7 @@ public class User {
         if (login != null ? !login.equals(that.login) : that.login != null) return false;
         if (password != null ? !password.equals(that.password) : that.password != null) return false;
         if (userName != null ? !userName.equals(that.userName) : that.userName != null) return false;
-        if (role != null ? !role.equals(that.role) : that.role != null) return false;
-
+        if (enabled != null ? !enabled.equals(that.enabled) : that.enabled != null) return false;
         return true;
     }
 
@@ -127,7 +112,7 @@ public class User {
         result = 31 * result + (login != null ? login.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (userName != null ? userName.hashCode() : 0);
-        result = 31 * result + (role != null ? role.hashCode() : 0);
+        result = 31 * result + (enabled != null ? enabled.hashCode() : 0);
         return result;
     }
 

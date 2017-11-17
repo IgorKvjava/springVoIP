@@ -23,28 +23,30 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-        //   auth.userDetailsService(userDetailsService).passwordEncoder(passwordencoder());;
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordencoder());
         auth.authenticationProvider(authProvider());
     }
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.csrf().disable().authorizeRequests()
-               .antMatchers("/*").permitAll()
-                .antMatchers("/admin/**","/mainUserPage/**").access("hasRole('ROLE_ADMIN')")
-//                .antMatchers("/user/**").access("hasRole('USER')")
+        httpSecurity.authorizeRequests()
+               .antMatchers("/index").permitAll()
+                .antMatchers("/admin/**","/mainUserPage/**","/user/**").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/user/**").access("hasRole('ROLE_USER')")
                // .antMatchers("/console/**").permitAll()
                 .and().formLogin()
                .loginPage("/loginPage")
+                .failureUrl("/login-error")
                 .permitAll()
                 .and()
                 .logout()
+                .logoutSuccessUrl("/index")
                 .permitAll()
-//                .and().exceptionHandling().accessDeniedHandler(accessDeniedHandler())
+                .and().exceptionHandling().accessDeniedHandler(accessDeniedHandler())
                 ;
 
-       /* httpSecurity.csrf().disable();
-        httpSecurity.headers().frameOptions().disable();*/
+        httpSecurity.csrf().disable();
+//        httpSecurity.headers().frameOptions().disable();
     }
 
     @Bean
@@ -57,7 +59,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         // Specific Authentication implementation that retrieves user details from a UserDetailsService.
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(userDetailsService);
-//        authProvider.setPasswordEncoder(passwordencoder());
+        authProvider.setPasswordEncoder(passwordencoder());
         return authProvider;
     }
     @Bean(name = "passwordEncoder")
@@ -67,10 +69,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     /*@Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-
         auth.inMemoryAuthentication()
                 .withUser("user1").password("1").roles("USER")
                 .and()
                 .withUser("admin").password("$2a$10$F3N38T.RB8OQXUUUxAMMh.xBLbFeHQ3iNxDym8yUGsQOmFrE2FLqC").roles("ADMIN");
     }*/
+
 }

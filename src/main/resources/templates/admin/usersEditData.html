@@ -25,12 +25,12 @@
                     <td th:text="${user.login}">User login</td>
                     <td th:text="${user.password}">User password</td>
                     <td th:text="${user.userName}">User name</td>
-                    <td th:text="${user.role}">User role</td>
+                    <td th:text="${user.enabled}">User role</td>
                     <td><a th:href="${ '/user/edit/' + user.id}">Edit</a></td>
                     <td><a th:href="${'/user/delete/' + user.id}">Delete</a></td>
                 </tr>
             </table>
-
+            <a href="#" th:href="@{/logout}">Вихід</a>
         </div>
     </div>
 </div>

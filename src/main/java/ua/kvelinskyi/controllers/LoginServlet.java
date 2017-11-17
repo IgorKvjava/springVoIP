@@ -4,7 +4,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
@@ -30,7 +29,7 @@ public class LoginServlet {
     @Autowired
     UserServiceImpl userServiceImpl;
 
-    @RequestMapping(value = "/")
+    @RequestMapping(value = "/index")
     public ModelAndView getIndex() {
         ModelAndView modelAndView = new ModelAndView();
         log.info("IndexController has started !");
@@ -39,8 +38,16 @@ public class LoginServlet {
     }
 
     @RequestMapping(value = "/loginPage")
-    public ModelAndView getLogin() {
+    public ModelAndView getLogin(Principal loggedUser) {
         ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("loginPage");
+        return modelAndView;
+    }
+    // Login form with error
+    @RequestMapping("/login-error")
+    public ModelAndView getloginError() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("loginError", true);
         modelAndView.setViewName("loginPage");
         return modelAndView;
     }
@@ -54,7 +61,7 @@ public class LoginServlet {
 
 
     @RequestMapping(value = "/mainUserPage")
-    public ModelAndView getMainUserPage(Principal loggedUser) {
+    public ModelAndView getMainUserPage(Authentication loggedUser) {
         ModelAndView mod = new ModelAndView();
                 log.info("public class LoginServlet--RequestMapping --mainPageUser ADMIN");
                 List<User> listAllUsers = userServiceImpl.getAll();
@@ -86,11 +93,14 @@ public class LoginServlet {
             user.setLogin(login);
             String cryptedPassword = new BCryptPasswordEncoder().encode(password);
             user.setPassword(cryptedPassword);
-            user.setRole("USER");
+            user.setEnabled("true");
             user.setUserName("enter your name");
             user = userServiceImpl.addUser(user);
-            mod.addObject("user", user);
-            mod.setViewName("index");
+            if(user!=null){
+                mod.setViewName("index");
+            }else {
+                mod.setViewName("registration");
+            }
         }
         return mod;
     }
@@ -105,17 +115,36 @@ public class LoginServlet {
     @RequestMapping(value = "userUpdateData", method = RequestMethod.POST)
     public ModelAndView doUserEditData(@RequestParam("password") String password,
                                        @RequestParam("userName") String userName,
+                                       @RequestParam("enabled") String enabled,
                                        @Validated
                                                User user) {
         ModelAndView mod = new ModelAndView();
         user.setPassword(password);
         user.setUserName(userName);
+        user.setEnabled(enabled);
         user = userServiceImpl.editUser(user);
         mod.addObject("user", user);
         mod.setViewName("/user/userEditDataPage");
         return mod;
     }
+    // for 403 access denied page
+    @RequestMapping(value = "/accessDenied", method = RequestMethod.GET)
+    public ModelAndView accessDenied(Principal user) {
 
+        ModelAndView model = new ModelAndView();
+
+        if (user != null) {
+            model.addObject("msg", "Hi " + user.getName()
+                    + ", you do not have permission to access this page!");
+        } else {
+            model.addObject("msg",
+                    "You do not have permission to access this page!");
+        }
+
+        model.setViewName("accessDenied");
+        return model;
+
+    }
     /*@RequestMapping(value = "editUserDataPage", method = RequestMethod.POST)
     public ModelAndView doUserEditDataPage(
             @Validated
