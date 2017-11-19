@@ -16,7 +16,7 @@
                     <th>Login</th>
                     <th>Password</th>
                     <th>Name</th>
-                    <th>Role</th>
+                    <th>Enabled</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
@@ -25,9 +25,9 @@
                     <td th:text="${user.login}">User login</td>
                     <td th:text="${user.password}">User password</td>
                     <td th:text="${user.userName}">User name</td>
-                    <td th:text="${user.enabled}">User role</td>
-                    <td><a th:href="${ '/user/edit/' + user.id}">Edit</a></td>
-                    <td><a th:href="${'/user/delete/' + user.id}">Delete</a></td>
+                    <td th:text="${user.enabled}">User enabled</td>
+                    <td><a th:href="${ '/admin/user/edit/' + user.id}">Edit</a></td>
+                    <td><a th:href="${'/admin/user/delete/' + user.id}">Delete</a></td>
                 </tr>
             </table>
             <a href="#" th:href="@{/logout}">Вихід</a>

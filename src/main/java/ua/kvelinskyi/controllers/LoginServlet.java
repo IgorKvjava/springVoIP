@@ -19,7 +19,7 @@ import java.util.List;
 public class LoginServlet {
 
     private Logger log;
-    //TODO Autowired
+    //TODO Autowired log
     @Autowired
     public void setLog(Logger log) {
         this.log = log;
@@ -28,17 +28,33 @@ public class LoginServlet {
     FormValidator formValidator;
     @Autowired
     UserServiceImpl userServiceImpl;
+//TODO link 111
+    @RequestMapping(value = "/111")
+    public ModelAndView get111() {
+        ModelAndView modelAndView = new ModelAndView();
+        log.info("class LoginServlet -IndexController(/) has started !");
+        modelAndView.setViewName("11111");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/")
+    public ModelAndView getIndexSlash() {
+        ModelAndView modelAndView = new ModelAndView();
+        log.info("class LoginServlet -IndexController(/) has started !");
+        modelAndView.setViewName("index");
+        return modelAndView;
+    }
 
     @RequestMapping(value = "/index")
     public ModelAndView getIndex() {
         ModelAndView modelAndView = new ModelAndView();
-        log.info("IndexController has started !");
+        log.info("class LoginServlet - IndexController(/index) has started !");
         modelAndView.setViewName("index");
         return modelAndView;
     }
 
     @RequestMapping(value = "/loginPage")
-    public ModelAndView getLogin(Principal loggedUser) {
+    public ModelAndView getLogin() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("loginPage");
         return modelAndView;
@@ -59,11 +75,10 @@ public class LoginServlet {
         return modelAndView;
     }
 
-
     @RequestMapping(value = "/mainUserPage")
     public ModelAndView getMainUserPage(Authentication loggedUser) {
         ModelAndView mod = new ModelAndView();
-                log.info("public class LoginServlet--RequestMapping --mainPageUser ADMIN");
+                log.info("class LoginServlet - RequestMapping - mainPageUser ADMIN");
                 List<User> listAllUsers = userServiceImpl.getAll();
                 mod.addObject("listAllUsers", listAllUsers);
                 mod.setViewName("/admin/usersEditData");
@@ -72,11 +87,11 @@ public class LoginServlet {
 
     @RequestMapping(value = "/signUp", method = RequestMethod.GET)
     public ModelAndView getRegistrationPage() {
-        User user = new User();
+       // User user = new User();
         ModelAndView modelAndView = new ModelAndView();
-        log.info("signUp has started !");
+        log.info("class LoginServlet - signUp has started !");
         modelAndView.setViewName("registration");
-        modelAndView.addObject("user", user);
+       // modelAndView.addObject("user", user);
         return modelAndView;
     }
 //TODO change registration
@@ -84,9 +99,10 @@ public class LoginServlet {
     public ModelAndView doRegistrationUser(@RequestParam("login") String login,
                                            @RequestParam("password") String password)
     {
-        log.info("public class LoginServlet--RequestMapping --registration");
+        log.info("public class LoginServlet -- registration");
         ModelAndView mod = new ModelAndView();
         if (userServiceImpl.getByLogin(login)!=null) {
+            log.info("class LoginServlet - registration Login isExist");
             mod.setViewName("registration");
         } else {
             User user = new User();
@@ -96,6 +112,7 @@ public class LoginServlet {
             user.setEnabled("true");
             user.setUserName("enter your name");
             user = userServiceImpl.addUser(user);
+            log.info("class LoginServlet - registration new user");
             if(user!=null){
                 mod.setViewName("index");
             }else {
@@ -104,22 +121,28 @@ public class LoginServlet {
         }
         return mod;
     }
-
+    // TODO do'n use initValidator
     @InitBinder
     protected void initValidator(WebDataBinder binder) {
         // bind validator to controller
         binder.setValidator(this.formValidator);
     }
 
+    @RequestMapping(value = "/user/mainUserPage", method = RequestMethod.POST)
+    public ModelAndView doEditUser(){
+        ModelAndView mod = new ModelAndView();
+        return mod;
+    }
 
-    @RequestMapping(value = "userUpdateData", method = RequestMethod.POST)
+    @RequestMapping(value = "/userUpdateData")
     public ModelAndView doUserEditData(@RequestParam("password") String password,
                                        @RequestParam("userName") String userName,
                                        @RequestParam("enabled") String enabled,
                                        @Validated
                                                User user) {
         ModelAndView mod = new ModelAndView();
-        user.setPassword(password);
+        String cryptedPassword = new BCryptPasswordEncoder().encode(password);
+        user.setPassword(cryptedPassword);
         user.setUserName(userName);
         user.setEnabled(enabled);
         user = userServiceImpl.editUser(user);
@@ -127,12 +150,12 @@ public class LoginServlet {
         mod.setViewName("/user/userEditDataPage");
         return mod;
     }
+
+
     // for 403 access denied page
     @RequestMapping(value = "/accessDenied", method = RequestMethod.GET)
     public ModelAndView accessDenied(Principal user) {
-
         ModelAndView model = new ModelAndView();
-
         if (user != null) {
             model.addObject("msg", "Hi " + user.getName()
                     + ", you do not have permission to access this page!");

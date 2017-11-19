@@ -15,7 +15,8 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 import ua.kvelinskyi.controllers.error.CustomAccessDeniedHandler;
 
 @Configuration
-@EnableWebSecurity(debug =true)
+//@EnableWebSecurity(debug =true)
+@EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -30,8 +31,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests()
-               .antMatchers("/index").permitAll()
-                .antMatchers("/admin/**","/mainUserPage/**","/user/**").access("hasRole('ROLE_ADMIN')")
+               .antMatchers("/index", "/").permitAll()
+                .antMatchers("/admin/**", "/mainUserPage/**",
+                        "/userUpdateData").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/user/**").access("hasRole('ROLE_USER')")
                // .antMatchers("/console/**").permitAll()
                 .and().formLogin()
