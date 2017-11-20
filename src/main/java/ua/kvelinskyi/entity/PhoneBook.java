@@ -14,11 +14,13 @@ public class PhoneBook {
     private String phoneHome;
     private String address;
     private String eMail;
+    private User user;
 
     public PhoneBook() {
     }
 
-    public PhoneBook(int idUser, String suname, String fistName, String middleName, String phoneMobile, String phoneHome, String address, String eMail) {
+    public PhoneBook(int idUser, String suname, String fistName, String middleName,
+                     String phoneMobile, String phoneHome, String address, String eMail) {
         this.idUser = idUser;
         this.suname = suname;
         this.fistName = fistName;
@@ -120,10 +122,18 @@ public class PhoneBook {
         this.eMail = eMail;
     }
 
+
+
     @ManyToOne
-    @JoinColumn(name = "id"
-            , foreignKey = @ForeignKey(name = "id_user_key_"))
-    private User user;
+    @JoinColumn(name = "user_id")
+//            , foreignKey = @ForeignKey(name = "id_user_key_"))
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     @Override
     public String toString() {

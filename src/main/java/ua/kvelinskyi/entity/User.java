@@ -12,6 +12,9 @@ public class User {
     private String password;
     private String userName;
     private String enabled;
+    private List<Form39> form39List = new ArrayList<>();
+    private List<PhoneBook> phoneBookList = new ArrayList<>();
+
 
     public User() {
     }
@@ -64,11 +67,6 @@ public class User {
         this.userName = userName;
     }
 
-//TODO reed getPhoneBookEntityList
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "user")
-    private List<PhoneBook> phoneBookEntityList = new ArrayList<>();
-
     @Basic
     @Column(name = "enabled")
     public String getEnabled() {
@@ -79,6 +77,26 @@ public class User {
         this.enabled = enabled;
     }
 
+//TODO reed getPhoneBookEntityList mappedBy = "user"!!! == class PhoneBook public void setUser(User user)  this.user = user!!!;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "user")
+    public List<PhoneBook> getPhoneBookList() {
+        return phoneBookList;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "user")
+    public List<Form39> getForm39List() {
+        return form39List;
+    }
+
+    public void setForm39List(List<Form39> form39List) {
+        this.form39List = form39List;
+    }
+
+    public void setPhoneBookList(List<PhoneBook> phoneBookList) {
+        this.phoneBookList = phoneBookList;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -87,7 +105,8 @@ public class User {
                 ", password='" + password + '\'' +
                 ", userName='" + userName + '\'' +
                 ", enabled='" + enabled + '\'' +
-                ", phoneBookEntityList=" + phoneBookEntityList +
+                ", phoneBookList=" + phoneBookList +
+                ", form39List=" + form39List +
                 '}';
     }
 
@@ -115,5 +134,6 @@ public class User {
         result = 31 * result + (enabled != null ? enabled.hashCode() : 0);
         return result;
     }
+
 
 }

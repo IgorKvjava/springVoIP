@@ -112,7 +112,7 @@ public class LoginServlet {
             user.setEnabled("true");
             user.setUserName("enter your name");
             user = userServiceImpl.addUser(user);
-            log.info("class LoginServlet - registration new user");
+            log.info("class LoginServlet - registration new user"+user.getUserName());
             if(user!=null){
                 mod.setViewName("index");
             }else {
@@ -141,8 +141,10 @@ public class LoginServlet {
                                        @Validated
                                                User user) {
         ModelAndView mod = new ModelAndView();
-        String cryptedPassword = new BCryptPasswordEncoder().encode(password);
-        user.setPassword(cryptedPassword);
+        if (!password.equals("0")){
+            String cryptedPassword = new BCryptPasswordEncoder().encode(password);
+            user.setPassword(cryptedPassword);
+        }
         user.setUserName(userName);
         user.setEnabled(enabled);
         user = userServiceImpl.editUser(user);

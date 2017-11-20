@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <title>Login</title>
+    <th:block th:include="fragments/headerinc :: head"></th:block>
+</head>
+<body>
+<div class="container">
+    <th:block th:include="fragments/header :: header"></th:block>
+    <div class="jumbotron">
+        <div>
+            <form  th:action="@{/user/form39}">
+                <table class="table table-striped">
+                    <tr>
+                        <th>A</th>
+                        <th>1</th>
+                        <th>2</th>
+                        <th>3</th>
+                        <th>4</th>
+                        <th>5</th>
+                        <th>6</th>
+                        <th>7</th>
+                        <th>8</th>
+                        <th>9</th>
+                        <th>10</th>
+                        <th>11</th>
+                        <th>12</th>
+                        <th>13</th>
+                        <th>14</th>
+                    </tr>
+
+                    <tr>
+                        <td><input type="text" class="form-control" th:name="numDay" th:value="${numDay}"
+                                   placeholder="numDay" required="true" autofocus="true"/>numDay</td>
+                        <td><input type="text" class="form-control" th:name="numberVisitsAll" th:value="${numberVisitsAll}"
+                                   placeholder="numberVisitsAll" required="true"/>number</td>
+                        <td><input type="text" class="form-control" th:name="ofVillagers" th:value="${ofVillagers}"
+                                   placeholder="ofVillagers" required="true"/>number</td>
+                        <td><input type="text" class="form-control" th:name="childrenVisitsAll" th:value="${childrenVisitsAll}"
+                                   placeholder="childrenVisitsAll" required="true"/>listForm39Data.childrenVisitsAll</td>
+                        <td><input type="text" class="form-control" th:name="childrenVisitsVillagers" th:value="${childrenVisitsVillagers}"
+                                   placeholder="childrenVisitsVillagers" required="true"/>listForm39Data.childrenVisitsVillagers</td>
+                        <td><input type="text" class="form-control" th:name="adultsVisitsDisease" th:value="${adultsVisitsDisease}"
+                                   placeholder="adultsVisitsDisease" required="true"/>listForm39Data.adultsVisitsDisease</td>
+                        <td><input type="text" class="form-control" th:name="adultsVisitsDiseaseVillagers" th:value="${adultsVisitsDiseaseVillagers}"
+                                   placeholder="adultsVisitsDiseaseVillagers" required="true"/>listForm39Data.adultsVisitsDiseaseVillagers</td>
+                        <td><input type="text" class="form-control" th:name="childrenVisitsDisease" th:value="${childrenVisitsDisease}"
+                                   placeholder="childrenVisitsDisease" required="true"/>listForm39Data.childrenVisitsDisease</td>
+                        <td><input type="text" class="form-control" th:name="childrenVisitsDiseaseVillagers" th:value="${childrenVisitsDiseaseVillagers}"
+                                   placeholder="childrenVisitsDiseaseVillagers" required="true"/>listForm39Data.childrenVisitsDiseaseVillagers</td>
+                        <td><input type="text" class="form-control" th:name="visitsHomeAll" th:value="${visitsHomeAll}"
+                                   placeholder="visitsHomeAll" required="true"/>listForm39Data.visitsHomeAll</td>
+                        <td><input type="text" class="form-control" th:name="visitsHomeVillagers" th:value="${visitsHomeVillagers}"
+                                   placeholder="visitsHomeVillagers" required="true"/>listForm39Data.visitsHomeVillagers</td>
+                        <td><input type="text" class="form-control" th:name="childrenVisitsHomeAll" th:value="${childrenVisitsHomeAll}"
+                                   placeholder="childrenVisitsHomeAll" required="true"/>listForm39Data.childrenVisitsHomeAll</td>
+                        <td><input type="text" class="form-control" th:name="childrenVisitsHomeVillagers" th:value="${childrenVisitsHomeVillagers}"
+                                   placeholder="childrenVisitsHomeVillagers" required="true"/>listForm39Data.childrenVisitsHomeVillagers</td>
+                        <td><input type="text" class="form-control" th:name="childrenPatronage" th:value="${childrenPatronage}"
+                                   placeholder="childrenPatronage" required="true"/>listForm39Data.childrenPatronage</td>
+                        <td><input type="text" class="form-control" th:name="childrenPatronageVillagers" th:value="${childrenPatronageVillagers}"
+                                   placeholder="childrenPatronageVillagers" required="true"/>listForm39Data.childrenPatronageVillagers}</td>
+                        <!--<td>${listForm39Data.userByIdDoctor.fio}</td>
+                        <td>${listForm39Data.userByIdDoctor.specialtyDoctor}</td>-->
+                    </tr>
+                </table>
+                <div class="row">
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
