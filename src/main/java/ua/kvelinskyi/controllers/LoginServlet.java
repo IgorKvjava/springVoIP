@@ -61,7 +61,7 @@ public class LoginServlet {
     }
     // Login form with error
     @RequestMapping("/login-error")
-    public ModelAndView getloginError() {
+    public ModelAndView getLoginError() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("loginError", true);
         modelAndView.setViewName("loginPage");
@@ -141,6 +141,7 @@ public class LoginServlet {
                                        @Validated
                                                User user) {
         ModelAndView mod = new ModelAndView();
+
         if (!password.equals("0")){
             String cryptedPassword = new BCryptPasswordEncoder().encode(password);
             user.setPassword(cryptedPassword);
