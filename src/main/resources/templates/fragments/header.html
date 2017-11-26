@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:th="http://www.thymeleaf.org"
+      xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head lang="en">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -20,28 +20,23 @@
                 <div class="navbar-header">
                     <a class="navbar-brand" href="#" th:href="@{/index}">Головна</a>
                     <ul class="nav navbar-nav">
-                        <div class="navbar-brand" sec:authorize ="isAnonymous()">
-                        <li><a href="#" th:href="@{/loginPage}">Вхід</a></li>
-                        </div>
-                        <div class="navbar-brand" sec:authorize ="isAnonymous()">
-                        <li><a href="#" th:href="@{/signUp}">Реєстрація</a></li>
-                        </div>
+                        <li><a href="#" th:href="@{/loginPage}" sec:authorize="isAnonymous()">Вхід</a></li>
+                        <li><a href="#" th:href="@{/signUp}" sec:authorize="isAnonymous()">Реєстрація</a></li>
                         <li><a href="#" th:href="@{/infoPage}"> Контактна інформація</a></li>
-                        <div class="navbar-brand" sec:authorize ="hasRole('ROLE_ADMIN')">
-                            <li><a href="#" th:href="@{/mainUserPage}">Admin page</a></li>
-                        </div>
-                        <div class="navbar-brand" sec:authorize ="hasRole('ROLE_USER')">
-                            <li><a href="#" th:href="@{/user/form39}">User page</a></li>
-                        </div>
-                        <div class="navbar-brand" sec:authorize ="isAuthenticated()">
-                            <li><a href="#" th:href="@{/logout}">Logout</a></li>
-                        </div>
+                        <li><a href="#" th:href="@{/admin/usersEditData}" sec:authorize="hasRole('ROLE_ADMIN')">Users
+                            Edit Data</a></li>
+                        <li><a href="#" th:href="@{/user/form39}" sec:authorize="hasRole('ROLE_USER')">Form 39 page</a>
+                        </li>
+                        <li><a href="#" th:href="@{/logout}" sec:authorize="isAuthenticated()">Logout</a></li>
                         <li><a href="#" th:href="@{/111}">111</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
+        <div class="welcome">
+            <span sec:authorize="isAuthenticated()">Welcome <span sec:authentication="name"></span></span>
+        </div>
     </div>
- </div>
+</div>
 </body>
 </html>

@@ -9,10 +9,11 @@
     <th:block th:include="fragments/header :: header"></th:block>
     <div class="jumbotron">
         <div >
-            <form  th:action="@{/user/form39}">
+            <form  th:object="${form39}" th:action="@{'/user/form39/'+${UserId}}">
                 <div class="table-responsive" >
                 <table class="table">
                     <tr>
+                        <th>id werty</th>
                         <th>A</th>
                         <th>1</th>
                         <th>2</th>
@@ -30,35 +31,36 @@
                         <th>14</th>
                     </tr>
                     <tr>
-                        <td><input size="3" type="text" th:name="numDay" th:value="${numDay}"
-                                   placeholder="num" required="true" autofocus="true"/>numDay</td>
-                        <td><input size="3" type="text"  th:name="numberVisi+tsAll" th:value="${numberVisitsAll}"
-                                   placeholder="num" required="true"/>number</td>
-                        <td><input size="3" type="text"  th:name="ofVillagers" th:value="${ofVillagers}"
-                                   placeholder="num" required="true"/>number</td>
-                        <td><input size="3" type="text" th:name="childrenVisitsAll" th:value="${childrenVisitsAll}"
+                        <td th:text="*{user}"> id</td>
+                        <td><input size="3" type="text" th:name="numDay" th:field="*{numDay}"
+                                   placeholder="num" required="true" autofocus="true"/></td>
+                        <td><input size="3" type="text"  th:name="numberVisi+tsAll" th:field="*{numberVisitsAll}"
                                    placeholder="num" required="true"/></td>
-                        <td><input size="3" type="text"  th:name="childrenVisitsVillagers" th:value="${childrenVisitsVillagers}"
+                        <td><input size="3" type="text"  th:name="ofVillagers" th:field="*{ofVillagers}"
                                    placeholder="num" required="true"/></td>
-                        <td><input size="3" type="text"  th:name="adultsVisitsDisease" th:value="${adultsVisitsDisease}"
+                        <td><input size="3" type="text" th:name="childrenVisitsAll" th:field="*{childrenVisitsAll}"
                                    placeholder="num" required="true"/></td>
-                        <td><input size="3" type="text"  th:name="adultsVisitsDiseaseVillagers" th:value="${adultsVisitsDiseaseVillagers}"
+                        <td><input size="3" type="text"  th:name="childrenVisitsVillagers" th:field="*{childrenVisitsVillagers}"
                                    placeholder="num" required="true"/></td>
-                        <td><input size="3" type="text"  th:name="childrenVisitsDisease" th:value="${childrenVisitsDisease}"
+                        <td><input size="3" type="text"  th:name="adultsVisitsDisease" th:field="*{adultsVisitsDisease}"
                                    placeholder="num" required="true"/></td>
-                        <td><input size="3" type="text"  th:name="childrenVisitsDiseaseVillagers"  th:value="${childrenVisitsDiseaseVillagers}"
+                        <td><input size="3" type="text"  th:name="adultsVisitsDiseaseVillagers" th:field="*{adultsVisitsDiseaseVillagers}"
                                    placeholder="num" required="true"/></td>
-                        <td><input size="3" type="text"  th:name="visitsHomeAll" th:value="${visitsHomeAll}"
+                        <td><input size="3" type="text"  th:name="childrenVisitsDisease" th:field="*{childrenVisitsDisease}"
+                                   placeholder="num" required="true"/></td>
+                        <td><input size="3" type="text"  th:name="childrenVisitsDiseaseVillagers"  th:field="*{childrenVisitsDiseaseVillagers}"
+                                   placeholder="num" required="true"/></td>
+                        <td><input size="3" type="text"  th:name="visitsHomeAll" th:field="*{visitsHomeAll}"
                                    placeholder="visitsHomeAll" required="true"/></td>
-                        <td><input size="3" type="text"  th:name="visitsHomeVillagers" th:value="${visitsHomeVillagers}"
+                        <td><input size="3" type="text"  th:name="visitsHomeVillagers" th:field="*{visitsHomeVillagers}"
                                    placeholder="num" required="true"/></td>
-                        <td><input size="3" type="text"  th:name="childrenVisitsHomeAll" th:value="${childrenVisitsHomeAll}"
+                        <td><input size="3" type="text"  th:name="childrenVisitsHomeAll" th:field="*{childrenVisitsHomeAll}"
                                    placeholder="num" required="true"/></td>
-                        <td><input size="3" type="text"  th:name="childrenVisitsHomeVillagers" th:value="${childrenVisitsHomeVillagers}"
+                        <td><input size="3" type="text"  th:name="childrenVisitsHomeVillagers" th:field="*{childrenVisitsHomeVillagers}"
                                    placeholder="num" required="true"/></td>
-                        <td><input size="3" type="text"  th:name="childrenPatronage" th:value="${childrenPatronage}"
+                        <td><input size="3" type="text"  th:name="childrenPatronage" th:field="*{childrenPatronage}"
                                    placeholder="num" required="true"/></td>
-                        <td><input size="3" type="text"  th:name="childrenPatronageVillagers" th:value="${childrenPatronageVillagers}"
+                        <td><input size="3" type="text"  th:name="childrenPatronageVillagers" th:field="*{childrenPatronageVillagers}"
                                    placeholder="num" required="true"/></td>
                         <!--<td>${listForm39Data.userByIdDoctor.fio}</td>
                         <td>${listForm39Data.userByIdDoctor.specialtyDoctor}</td>-->

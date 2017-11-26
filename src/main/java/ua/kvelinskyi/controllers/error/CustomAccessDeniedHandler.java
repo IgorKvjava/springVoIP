@@ -1,5 +1,7 @@
 package ua.kvelinskyi.controllers.error;
 
+import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,6 +15,12 @@ import java.io.IOException;
 @Component
 public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 
+    private Logger log;
+    //TODO Autowired Logger
+    @Autowired
+    public void setLog(Logger log) {
+        this.log = log;
+    }
     @Override
     public void handle(
             HttpServletRequest request,
@@ -22,7 +30,7 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
         Authentication auth
                 = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {
-            System.out.println("User: " + auth.getName()
+            log.info("User: " + auth.getName()
                     + " attempted to access the protected URL: "
                     + request.getRequestURI());
         }

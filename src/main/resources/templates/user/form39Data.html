@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <title>Form 39</title>
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+<div class="container">
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+    <div class="jumbotron">
+        <div th:if="${not #lists.isEmpty(form39List)}">
+            <h2>Form 39 List</h2>
+            <table class="table table-striped">
+                <tr>
+                    <th>A</th>
+                    <th>1</th>
+                    <th>2</th>
+                    <th>3</th>
+                    <th>4</th>
+                    <th>5</th>
+                    <th>6</th>
+                    <th>7</th>
+                    <th>8</th>
+                    <th>9</th>
+                    <th>10</th>
+                    <th>11</th>
+                    <th>12</th>
+                    <th>13</th>
+                    <th>14</th>
+                </tr>
+                <tr th:each="form39 : ${form39List}">
+                    <td th:text="${form39.numDay}"></td>
+                    <td th:text="${form39.numberVisitsAll}"></td>
+                    <td th:text="${form39.ofVillagers}"></td>
+                    <td th:text="${form39.childrenVisitsAll}"></td>
+                    <td th:text="${form39.childrenVisitsVillagers}"></td>
+                    <td th:text="${form39.adultsVisitsDisease}"></td>
+                    <td th:text="${form39.adultsVisitsDiseaseVillagers}"></td>
+                    <td th:text="${form39.childrenVisitsDisease}"></td>
+                    <td th:text="${form39.childrenVisitsDiseaseVillagers}"></td>
+                    <td th:text="${form39.visitsHomeAll}"></td>
+                    <td th:text="${form39.visitsHomeVillagers}"></td>
+                    <td th:text="${form39.childrenVisitsHomeAll}"></td>
+                    <td th:text="${form39.childrenVisitsHomeVillagers}"></td>
+                    <td th:text="${form39.childrenPatronage}"></td>
+                    <td th:text="${form39.childrenPatronageVillagers}"></td>
+                </tr>
+            </table>
+            <a href="#" th:href="@{/logout}">Вихід</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -33,9 +33,10 @@ public class Form39 {
 
     public Form39(int idDoctor, Date dateNow, int numDay, int numberVisitsAll, int ofVillagers,
                   int childrenVisitsAll, int childrenVisitsVillagers, int adultsVisitsDisease,
-                  int adultsVisitsDiseaseVillagers, int childrenVisitsDisease, int childrenVisitsDiseaseVillagers,
-                  int visitsHomeAll, int visitsHomeVillagers, int childrenVisitsHomeAll, int childrenVisitsHomeVillagers,
-                  int childrenPatronage, int childrenPatronageVillagers) {
+                  int adultsVisitsDiseaseVillagers, int childrenVisitsDisease,
+                  int childrenVisitsDiseaseVillagers, int visitsHomeAll, int visitsHomeVillagers,
+                  int childrenVisitsHomeAll, int childrenVisitsHomeVillagers, int childrenPatronage,
+                  int childrenPatronageVillagers) {
         this.idDoctor = idDoctor;
         this.dateNow = dateNow;
         this.numDay = numDay;
@@ -220,7 +221,7 @@ public class Form39 {
     }
 
     @ManyToOne
-    @JoinColumn(name = "users_id")
+    @JoinColumn(name = "user_id")
  //           , foreignKey = @ForeignKey(name = "id_user_key"))
     public User getUser() {
         return user;
@@ -251,7 +252,7 @@ public class Form39 {
                 ", childrenVisitsHomeVillagers=" + childrenVisitsHomeVillagers +
                 ", childrenPatronage=" + childrenPatronage +
                 ", childrenPatronageVillagers=" + childrenPatronageVillagers +
-                ", user=" + user +
+               // ", user=" + user +
                 '}';
     }
 

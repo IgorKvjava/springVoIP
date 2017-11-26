@@ -2,6 +2,7 @@ package ua.kvelinskyi.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ua.kvelinskyi.entity.Form39;
 import ua.kvelinskyi.entity.User;
 import ua.kvelinskyi.repository.UserRepository;
 import ua.kvelinskyi.service.UserService;
@@ -48,4 +49,10 @@ public class UserServiceImpl implements UserService {
     public User getUserById(Integer id) {
         return userRepository.findOne(id);
     }
+
+    public List<Form39> getListForm39User(Integer idUser) {
+        User user = getUserById(idUser);
+        return user.getForm39List();
+    }
+
 }

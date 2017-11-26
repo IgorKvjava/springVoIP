@@ -1,5 +1,6 @@
 package ua.kvelinskyi.service;
 
+import ua.kvelinskyi.entity.Form39;
 import ua.kvelinskyi.entity.User;
 import java.util.List;
 
@@ -12,4 +13,5 @@ public interface UserService {
     User  editUser(User  user);
     List<User > getAll();
     User getUserById(Integer id);
+    //List<Form39> getListForm39User(Integer idUser);
 }

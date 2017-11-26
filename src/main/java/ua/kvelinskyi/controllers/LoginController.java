@@ -4,19 +4,17 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ua.kvelinskyi.entity.User;
 import ua.kvelinskyi.service.impl.UserServiceImpl;
-
 import java.security.Principal;
 import java.util.List;
 
 @RestController
-public class LoginServlet {
+public class LoginController {
 
     private Logger log;
     //TODO Autowired log
@@ -59,6 +57,7 @@ public class LoginServlet {
         modelAndView.setViewName("loginPage");
         return modelAndView;
     }
+
     // Login form with error
     @RequestMapping("/login-error")
     public ModelAndView getLoginError() {
@@ -75,10 +74,10 @@ public class LoginServlet {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/mainUserPage")
+    @RequestMapping(value = "/admin/usersEditData")
     public ModelAndView getMainUserPage(Authentication loggedUser) {
         ModelAndView mod = new ModelAndView();
-                log.info("class LoginServlet - RequestMapping - mainPageUser ADMIN");
+                log.info("class LoginController - RequestMapping - mainPageUser ADMIN");
                 List<User> listAllUsers = userServiceImpl.getAll();
                 mod.addObject("listAllUsers", listAllUsers);
                 mod.setViewName("/admin/usersEditData");
@@ -94,15 +93,16 @@ public class LoginServlet {
        // modelAndView.addObject("user", user);
         return modelAndView;
     }
-//TODO change registration
+
+    //TODO change registration
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public ModelAndView doRegistrationUser(@RequestParam("login") String login,
                                            @RequestParam("password") String password)
     {
-        log.info("public class LoginServlet -- registration");
+        log.info("public class LoginController -- registration");
         ModelAndView mod = new ModelAndView();
         if (userServiceImpl.getByLogin(login)!=null) {
-            log.info("class LoginServlet - registration Login isExist");
+            log.info("class LoginController - registration Login isExist");
             mod.setViewName("registration");
         } else {
             User user = new User();
@@ -112,7 +112,7 @@ public class LoginServlet {
             user.setEnabled("true");
             user.setUserName("enter your name");
             user = userServiceImpl.addUser(user);
-            log.info("class LoginServlet - registration new user"+user.getUserName());
+            log.info("class LoginController - registration new user"+user.getUserName());
             if(user!=null){
                 mod.setViewName("index");
             }else {
@@ -153,7 +153,6 @@ public class LoginServlet {
         mod.setViewName("/user/userEditDataPage");
         return mod;
     }
-
 
     // for 403 access denied page
     @RequestMapping(value = "/accessDenied", method = RequestMethod.GET)

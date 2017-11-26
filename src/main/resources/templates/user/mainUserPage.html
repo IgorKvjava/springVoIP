@@ -16,14 +16,12 @@
                 <th>Login</th>
                 <th>Password</th>
                 <th>Name</th>
-                <th>Role</th>
             </tr>
             <tr th:object="${user}">
-                <td th:text="${user.id}"><a href="/phoneBook/${user.id}">Id</a></td>
+                <td th:text="${user.id}">Id</td>
                 <td th:text="${user.login}">User login</td>
                 <td th:text="${user.password}">User password</td>
                 <td th:text="${user.userName}">User name</td>
-                <td th:text="${user.role}">User role</td>
             </tr>
         </table>
             <div class="row">
