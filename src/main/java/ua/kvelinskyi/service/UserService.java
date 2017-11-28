@@ -13,5 +13,6 @@ public interface UserService {
     User  editUser(User  user);
     List<User > getAll();
     User getUserById(Integer id);
+    List<Integer> getUserIdByLogin(String login);
     //List<Form39> getListForm39User(Integer idUser);
 }

@@ -110,6 +110,7 @@ public class LoginController {
             String cryptedPassword = new BCryptPasswordEncoder().encode(password);
             user.setPassword(cryptedPassword);
             user.setEnabled("true");
+            user.setRole(2);
             user.setUserName("enter your name");
             user = userServiceImpl.addUser(user);
             log.info("class LoginController - registration new user"+user.getUserName());

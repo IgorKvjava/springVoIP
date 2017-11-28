@@ -1,15 +1,18 @@
+package ua.kvelinskyi;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
-
 import ua.kvelinskyi.controllers.AdminController;
 import ua.kvelinskyi.controllers.LoginController;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = ThymeleafApplicationTests.class )
+import static org.assertj.core.api.Assertions.assertThat;
+
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class ThymeleafApplicationTests {
 
     @Autowired
@@ -20,6 +23,6 @@ public class ThymeleafApplicationTests {
 
     @Test
     public void contextLoads() throws Exception {
-        assert (loginController).getInfoPage().isEmpty();
+        assertThat(adminController).isNotNull();
     }
 }

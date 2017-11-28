@@ -22,3 +22,28 @@ td {
 th:first-child, td:first-child {
     text-align: left;
 }*/
+/*table.example{
+    font-family:Arial;
+    font-size:12px;
+    border-collapse:collapse;
+}
+table.example td{
+    padding:5px;
+    border:1px solid #cc0;
+}
+
+td.vertical{
+    writing-mode: tb-rl;
+    filter: flipH flipV;
+    background:#fff; !* для устранения бага с отображением текста в IE6 и ниже *!
+    text-align:center;
+    font-size:12px;
+    font-family:Arial;
+}*/
+
+td {
+    vertical-align: center;
+    text-align: center;
+    border: 1px solid black;
+    border-collapse: collapse;
+}

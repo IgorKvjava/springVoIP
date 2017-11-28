@@ -10,10 +10,13 @@
     <div class="jumbotron">
         <div >
             <form  th:object="${form39}" th:action="@{'/user/form39/'+${UserId}}">
-                <div class="table-responsive" >
-                <table class="table">
+                <div class="table-responsive">
+                <table class="table table-border">
                     <tr>
-                        <th>id werty</th>
+                        <th th:colspan="15"><img src="../../static/images/form39.jpg" width="100%"
+                                                 th:src="@{/images/form39.jpg}"/></th>
+                    </tr>
+                    <!--<tr>
                         <th>A</th>
                         <th>1</th>
                         <th>2</th>
@@ -29,13 +32,12 @@
                         <th>12</th>
                         <th>13</th>
                         <th>14</th>
-                    </tr>
+                    </tr>-->
                     <tr>
-                        <td th:text="*{user}"> id</td>
-                        <td><input size="3" type="text" th:name="numDay" th:field="*{numDay}"
-                                   placeholder="num" required="true" autofocus="true"/></td>
+                        <td><input size="3" type="text" th:name="numDay" th:readonly="numDay" th:field="*{numDay}"
+                                   placeholder="num" required="true" /></td>
                         <td><input size="3" type="text"  th:name="numberVisi+tsAll" th:field="*{numberVisitsAll}"
-                                   placeholder="num" required="true"/></td>
+                                   placeholder="num" required="true" autofocus="true"/></td>
                         <td><input size="3" type="text"  th:name="ofVillagers" th:field="*{ofVillagers}"
                                    placeholder="num" required="true"/></td>
                         <td><input size="3" type="text" th:name="childrenVisitsAll" th:field="*{childrenVisitsAll}"
@@ -66,9 +68,12 @@
                         <td>${listForm39Data.userByIdDoctor.specialtyDoctor}</td>-->
                     </tr>
                 </table>
+                    <label>Дата заповнення форми:</label>
+                    <input size="10" type="date" th:name="dateNow" th:field="*{dateNow}"/>
+                    <br/>
                 </div>
                 <div class="row">
-                    <button type="submit" class="btn btn-default">Submit</button>
+                    <button type="submit" class="btn btn-success">Submit</button>
                 </div>
             </form>
         </div>

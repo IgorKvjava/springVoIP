@@ -10,8 +10,13 @@
     <div class="jumbotron">
         <div th:if="${not #lists.isEmpty(form39List)}">
             <h2>Form 39 List</h2>
-            <table class="table table-striped">
+            <div class="table-responsive">
+            <table class="table">
                 <tr>
+                    <th th:colspan="15"><img src="../../static/images/form39.jpg" width="100%"
+                                             th:src="@{/images/form39.jpg}"/></th>
+                </tr>
+                <!--<tr>
                     <th>A</th>
                     <th>1</th>
                     <th>2</th>
@@ -27,7 +32,7 @@
                     <th>12</th>
                     <th>13</th>
                     <th>14</th>
-                </tr>
+                </tr>-->
                 <tr th:each="form39 : ${form39List}">
                     <td th:text="${form39.numDay}"></td>
                     <td th:text="${form39.numberVisitsAll}"></td>
@@ -46,6 +51,7 @@
                     <td th:text="${form39.childrenPatronageVillagers}"></td>
                 </tr>
             </table>
+            </div>
             <a href="#" th:href="@{/logout}">Вихід</a>
         </div>
     </div>
