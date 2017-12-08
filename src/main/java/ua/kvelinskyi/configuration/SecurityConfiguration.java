@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import ua.kvelinskyi.controllers.error.CustomAccessDeniedHandler;
+import ua.kvelinskyi.controllers.error.ErrorController;
 
 @Configuration
 //@EnableWebSecurity(debug =true)
@@ -31,7 +32,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests()
-               .antMatchers("/index", "/").permitAll()
+               .antMatchers("/index", "/", "/error").permitAll()
+                .antMatchers("/zzz").permitAll()
                 .antMatchers("/admin/**", "/mainUserPage/**",
                         "/userUpdateData").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/user/**").access("hasRole('ROLE_USER')")
@@ -56,6 +58,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new CustomAccessDeniedHandler();
     }
 
+    @Bean
+    ErrorController errorController (){
+        return  new ErrorController();
+    }
     @Bean
     public DaoAuthenticationProvider authProvider() {
         // Specific Authentication implementation that retrieves user details from a UserDetailsService.

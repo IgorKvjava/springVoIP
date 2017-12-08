@@ -2,6 +2,8 @@ package ua.kvelinskyi.controllers;
 
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -94,5 +96,10 @@ public class UserController {
         mod.addObject("form39List", listForm39ByDateNow);
         mod.setViewName("/user/form39Data");
         return mod;
+    }
+    @RequestMapping("/zzz")
+            public ResponseEntity<String> gggg(){
+        int e = 1/0;
+        return new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

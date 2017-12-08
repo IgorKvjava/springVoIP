@@ -21,10 +21,13 @@ public class ErrorController {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ModelAndView getException(final Throwable throwable) {
         ModelAndView modelAndView = new ModelAndView();
+
         logger.error("Exception during execution of SpringSecurity application", throwable);
         String errorMessage = (throwable != null ? throwable.getMessage() : "Unknown error");
         modelAndView.addObject("errorMessage", errorMessage);
+        modelAndView.addObject("exception", throwable);
         modelAndView.setViewName("error");
+//        modelAndView.setStatus(HttpStatus.SERVICE_UNAVAILABLE);
         return modelAndView;
     }
 }

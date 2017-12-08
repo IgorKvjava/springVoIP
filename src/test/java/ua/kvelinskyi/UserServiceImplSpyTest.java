@@ -4,16 +4,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Spy;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 import ua.kvelinskyi.entity.User;
 import ua.kvelinskyi.repository.UserRepository;
 import ua.kvelinskyi.service.impl.UserServiceImpl;
-
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringRunner.class)
 public class UserServiceImplSpyTest {
     @Spy
     private UserServiceImpl userServiceSpy;

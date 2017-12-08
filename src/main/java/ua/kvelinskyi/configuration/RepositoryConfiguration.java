@@ -14,8 +14,7 @@ import javax.sql.DataSource;
 
 @Configuration
 //@EnableAutoConfiguration
-@EnableJpaRepositories(basePackages = {"ua.kvelinskyi.service.impl",
-        "ua.kvelinskyi.repository"})
+@EnableJpaRepositories(basePackages = {"ua.kvelinskyi.service.impl", "ua.kvelinskyi.repository"})
 @EntityScan(basePackages = {"ua.kvelinskyi.entity"})
 @EnableTransactionManagement
 public class RepositoryConfiguration {
@@ -28,7 +27,6 @@ public class RepositoryConfiguration {
     public UserDetailsService userDetailsService() {
         // UserDetailsServiceRetrieves implementation which retrieves the
         // user details (username, password, enabled flag, and authorities) from a database using JDBC queries.
-
         JdbcDaoImpl jdbcDao = new JdbcDaoImpl();
         jdbcDao.setDataSource(dataSource);
         jdbcDao.setUsersByUsernameQuery("select login as username, password, enabled from users where login=?");
