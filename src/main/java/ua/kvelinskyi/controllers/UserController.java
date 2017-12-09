@@ -8,12 +8,15 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ua.kvelinskyi.entity.Form39;
 import ua.kvelinskyi.entity.User;
 import ua.kvelinskyi.service.impl.Form39ServiceImpl;
 import ua.kvelinskyi.service.impl.UserServiceImpl;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -97,6 +100,25 @@ public class UserController {
         mod.setViewName("/user/form39Data");
         return mod;
     }
+    @RequestMapping("/user/form39Data/timeInterval")
+    public ModelAndView doViewForm39DataByTimeInterval(Authentication loggedUser,
+                                                     @RequestParam("dateStart") java.sql.Date dateStart,
+                                                     @RequestParam("dateEnd") java.sql.Date dateEnd){
+        List<Integer> id = userServiceImpl.getUserIdByLogin(loggedUser.getName());
+        ModelAndView mod = new ModelAndView();
+        List<Form39> listForm39 = form39ServiceImpl.dataForm39ByTimeIntervalAndIdDoc(dateStart,
+                dateEnd, id.get(0));
+        List<Form39> sumList = new ArrayList<>();
+        for(Form39 form39 : listForm39){
+            sumList.addAll((Collection<? extends Form39>) form39);
+        }
+        mod.addObject("sumList", sumList);
+        mod.addObject("form39List", listForm39);
+        mod.setViewName("/user/form39Data");
+        return mod;
+    }
+
+    //TODO ERROR PAGE 500
     @RequestMapping("/zzz")
             public ResponseEntity<String> gggg(){
         int e = 1/0;

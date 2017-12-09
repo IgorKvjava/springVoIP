@@ -11,51 +11,91 @@
         <div th:if="${not #lists.isEmpty(form39List)}">
             <h2>Form 39 List</h2>
             <div class="table-responsive">
-            <table class="table">
-                <tr>
-                    <th th:colspan="15"><img src="../../static/images/form39.jpg" width="100%"
-                                             th:src="@{/images/form39.jpg}"/></th>
-                </tr>
-                <!--<tr>
-                    <th>A</th>
-                    <th>1</th>
-                    <th>2</th>
-                    <th>3</th>
-                    <th>4</th>
-                    <th>5</th>
-                    <th>6</th>
-                    <th>7</th>
-                    <th>8</th>
-                    <th>9</th>
-                    <th>10</th>
-                    <th>11</th>
-                    <th>12</th>
-                    <th>13</th>
-                    <th>14</th>
-                </tr>-->
-                <tr th:each="form39 : ${form39List}">
-                    <td th:text="${form39.numDay}"></td>
-                    <td th:text="${form39.numberVisitsAll}"></td>
-                    <td th:text="${form39.ofVillagers}"></td>
-                    <td th:text="${form39.childrenVisitsAll}"></td>
-                    <td th:text="${form39.childrenVisitsVillagers}"></td>
-                    <td th:text="${form39.adultsVisitsDisease}"></td>
-                    <td th:text="${form39.adultsVisitsDiseaseVillagers}"></td>
-                    <td th:text="${form39.childrenVisitsDisease}"></td>
-                    <td th:text="${form39.childrenVisitsDiseaseVillagers}"></td>
-                    <td th:text="${form39.visitsHomeAll}"></td>
-                    <td th:text="${form39.visitsHomeVillagers}"></td>
-                    <td th:text="${form39.childrenVisitsHomeAll}"></td>
-                    <td th:text="${form39.childrenVisitsHomeVillagers}"></td>
-                    <td th:text="${form39.childrenPatronage}"></td>
-                    <td th:text="${form39.childrenPatronageVillagers}"></td>
-                </tr>
-            </table>
+                <table class="table">
+                    <tr>
+                        <th th:colspan="15"><img src="../../static/images/form39.jpg" width="100%"
+                                                 th:src="@{/images/form39.jpg}"/></th>
+                    </tr>
+                    <!--<tr>
+                        <th>A</th>
+                        <th>1</th>
+                        <th>2</th>
+                        <th>3</th>
+                        <th>4</th>
+                        <th>5</th>
+                        <th>6</th>
+                        <th>7</th>
+                        <th>8</th>
+                        <th>9</th>
+                        <th>10</th>
+                        <th>11</th>
+                        <th>12</th>
+                        <th>13</th>
+                        <th>14</th>
+                    </tr>-->
+                    <tr th:each="form39 : ${form39List}">
+                        <td th:text="${form39.numDay}"></td>
+                        <td th:text="${form39.numberVisitsAll}"></td>
+                        <td th:text="${form39.ofVillagers}"></td>
+                        <td th:text="${form39.childrenVisitsAll}"></td>
+                        <td th:text="${form39.childrenVisitsVillagers}"></td>
+                        <td th:text="${form39.adultsVisitsDisease}"></td>
+                        <td th:text="${form39.adultsVisitsDiseaseVillagers}"></td>
+                        <td th:text="${form39.childrenVisitsDisease}"></td>
+                        <td th:text="${form39.childrenVisitsDiseaseVillagers}"></td>
+                        <td th:text="${form39.visitsHomeAll}"></td>
+                        <td th:text="${form39.visitsHomeVillagers}"></td>
+                        <td th:text="${form39.childrenVisitsHomeAll}"></td>
+                        <td th:text="${form39.childrenVisitsHomeVillagers}"></td>
+                        <td th:text="${form39.childrenPatronage}"></td>
+                        <td th:text="${form39.childrenPatronageVillagers}"></td>
+                    </tr>
+                    <div th:if="${not #lists.isEmpty(sumList)}">
+                        <tr th:each="form39 : ${sumList}">
+                            <td th:text="${form39.numDay}"></td>
+                            <td th:text="${form39.numberVisitsAll}"></td>
+                            <td th:text="${form39.ofVillagers}"></td>
+                            <td th:text="${form39.childrenVisitsAll}"></td>
+                            <td th:text="${form39.childrenVisitsVillagers}"></td>
+                            <td th:text="${form39.adultsVisitsDisease}"></td>
+                            <td th:text="${form39.adultsVisitsDiseaseVillagers}"></td>
+                            <td th:text="${form39.childrenVisitsDisease}"></td>
+                            <td th:text="${form39.childrenVisitsDiseaseVillagers}"></td>
+                            <td th:text="${form39.visitsHomeAll}"></td>
+                            <td th:text="${form39.visitsHomeVillagers}"></td>
+                            <td th:text="${form39.childrenVisitsHomeAll}"></td>
+                            <td th:text="${form39.childrenVisitsHomeVillagers}"></td>
+                            <td th:text="${form39.childrenPatronage}"></td>
+                            <td th:text="${form39.childrenPatronageVillagers}"></td>
+                        </tr>
+                    </div>
+                </table>
             </div>
-            <a href="#" th:href="@{/logout}">Вихід</a>
+            <form th:action="@{/user/form39Data/timeInterval}">
+                <div>
+                    <table class="table1">
+                        <caption>Виберіть період відображення даних</caption>
+                        <tr>
+                            <th style="width: 30px;">Дата початку:</th>
+                            <th style="width: 30px;">Дата кінця:</th>
+                        </tr>
+                        <tr>
+                            <td bordercolor="#FFFFFF" >
+                                <input size="30" type="date" th:name="dateStart" th:value="${dateStart}"/>
+                            </td>
+                            <td bordercolor="#FFFFFF" >
+                                <input size="30" type="date" th:name="dateEnd" th:value="${dateEnd}"/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <br/>
+                <div class="row">
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
-
 </body>
 </html>
