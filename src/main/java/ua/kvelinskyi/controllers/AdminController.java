@@ -1,14 +1,18 @@
 package ua.kvelinskyi.controllers;
 
 import org.apache.logging.log4j.Logger;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+import ua.kvelinskyi.entity.InformationDoctor;
 import ua.kvelinskyi.entity.User;
+import ua.kvelinskyi.service.impl.InformationDoctorServiceImpl;
 import ua.kvelinskyi.service.impl.UserServiceImpl;
+import java.util.Date;
+import java.util.List;
 
 @Controller
 public class AdminController {
@@ -21,10 +25,16 @@ public class AdminController {
     }
 
     @Autowired
-    FormValidator formValidator;
+    UserServiceImpl userServiceImpl;
 
     @Autowired
-    UserServiceImpl userServiceImpl;
+    InformationDoctorServiceImpl informationDoctorServiceImpl;
+
+    private Integer dayOfDate (java.sql.Date date){
+        String datePars = date.toString();
+        String[] stringList = datePars.split("-");
+        return Integer.parseInt(stringList[2]);
+    }
         //TODO decode password
     @RequestMapping("/admin/user/edit/{id}")
     public String edit(@PathVariable Integer id, Model model){
@@ -46,5 +56,28 @@ public class AdminController {
         userServiceImpl.delete(id);
         model.addAttribute("listAllUsers",userServiceImpl.getAll());
         return "/admin/usersEditData";
+    }
+    @RequestMapping("/admin/form39Admin")
+    public ModelAndView doForm39() {
+        log.info("class AdminController - page form-39 ");
+        Date curTime = new Date();
+        java.sql.Date currentDate = new java.sql.Date(curTime.getTime());
+        ModelAndView mod = new ModelAndView();
+        mod.addObject("dateStart", currentDate);
+        mod.addObject("dateEnd", currentDate);
+        mod.setViewName("/admin/form39Admin");
+        return mod;
+    }
+
+    @RequestMapping("/admin/informationDoctor")
+    public ModelAndView doSpecialtyOfDoctor() {
+        log.info("class AdminController - edit Specialty Of Doctor");
+        ModelAndView mod = new ModelAndView();
+        List<InformationDoctor> informationDoctorList = informationDoctorServiceImpl.getAll();
+        InformationDoctor informationDoctor = new InformationDoctor();
+        mod.addObject("informationDoctor", informationDoctor);
+        mod.addObject("informationDoctorList", informationDoctorList);
+        mod.setViewName("/admin/informationDoctor");
+        return mod;
     }
 }

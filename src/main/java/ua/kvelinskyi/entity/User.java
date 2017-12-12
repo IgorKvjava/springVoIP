@@ -15,6 +15,8 @@ public class User {
     private List<Form39> form39List = new ArrayList<>();
     private List<PhoneBook> phoneBookList = new ArrayList<>();
     private int role;
+    private InformationDoctor informationDoctor;
+
 
 
     public User() {
@@ -109,6 +111,16 @@ public class User {
 
     public void setPhoneBookList(List<PhoneBook> phoneBookList) {
         this.phoneBookList = phoneBookList;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "information_doctor_id")
+    public InformationDoctor getInformationDoctor() {
+        return informationDoctor;
+    }
+
+    public void setInformationDoctor(InformationDoctor informationDoctor) {
+        this.informationDoctor = informationDoctor;
     }
 
     @Override

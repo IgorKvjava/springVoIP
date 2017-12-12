@@ -72,30 +72,30 @@
                     </div>
                 </table>
             </div>
-            <form th:action="@{/user/form39Data/timeInterval}">
-                <div>
-                    <table class="table1">
-                        <caption>Виберіть період відображення даних</caption>
-                        <tr>
-                            <th style="width: 30px;">Дата початку:</th>
-                            <th style="width: 30px;">Дата кінця:</th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input size="30" type="date" th:name="dateStart" th:value="${dateStart}"/>
-                            </td>
-                            <td>
-                                <input size="30" type="date" th:name="dateEnd" th:value="${dateEnd}"/>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <br/>
-                <div class="row">
-                    <button type="submit" class="btn btn-success">Submit</button>
-                </div>
-            </form>
         </div>
+        <form th:action="@{/user/form39Data/timeInterval}">
+            <div>
+                <table class="table1">
+                    <caption>Виберіть період відображення даних</caption>
+                    <tr>
+                        <th style="width: 30px;">Дата початку:</th>
+                        <th style="width: 30px;">Дата кінця:</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input size="30" type="date" th:name="dateStart" th:value="${dateStart}"/>
+                        </td>
+                        <td>
+                            <input size="30" type="date" th:name="dateEnd" th:value="${dateEnd}"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <br/>
+            <div class="row">
+                <button type="submit" class="btn btn-success">Submit</button>
+            </div>
+        </form>
     </div>
 </div>
 </body>
