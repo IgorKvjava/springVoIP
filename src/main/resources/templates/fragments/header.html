@@ -22,11 +22,11 @@
                     <ul class="nav navbar-nav">
                         <li><a href="#" th:href="@{/loginPage}" sec:authorize="isAnonymous()">Вхід</a></li>
                         <li><a href="#" th:href="@{/signUp}" sec:authorize="isAnonymous()">Реєстрація</a></li>
-                        <li><a href="#" th:href="@{/admin/usersEditData}" sec:authorize="hasRole('ROLE_ADMIN')">Users
-                            Edit Data</a></li>
-                        <li><a href="#" th:href="@{/user/form39}" sec:authorize="hasRole('ROLE_USER')">Form 39 page</a>
+                        <li><a href="#" th:href="@{/admin/usersEditData}" sec:authorize="hasRole('ROLE_ADMIN')">Редагувати
+                            користовачів</a></li>
+                        <li><a href="#" th:href="@{/user/form39}" sec:authorize="hasRole('ROLE_USER')">Заповнити Форму №39</a>
                         </li>
-                        <li><a href="#" th:href="@{/user/form39Data}" sec:authorize="isAuthenticated()">View Form39 Data</a></li>
+                        <li><a href="#" th:href="@{/user/form39Data}" sec:authorize="hasRole('ROLE_USER')">Огляд Форми №39</a></li>
                         <li><a href="#" th:href="@{/infoPage}"> Контактна інформація</a></li>
                         <li><a href="#" th:href="@{/logout}" sec:authorize="isAuthenticated()">Вихід</a></li>
                     </ul>
@@ -34,7 +34,7 @@
             </div>
         </nav>
         <div class="welcome">
-            <span sec:authorize="isAuthenticated()">Welcome: <span sec:authentication="name"></span></span>
+            <span sec:authorize="isAuthenticated()">Ласкаво просимо : <span sec:authentication="name"></span></span>
         </div>
     </div>
 </div>

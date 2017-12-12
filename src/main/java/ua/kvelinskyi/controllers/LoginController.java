@@ -26,14 +26,6 @@ public class LoginController {
     FormValidator formValidator;
     @Autowired
     UserServiceImpl userServiceImpl;
-//TODO link 111
-    @RequestMapping(value = "/111")
-    public ModelAndView get111() {
-        ModelAndView modelAndView = new ModelAndView();
-        log.info("class LoginServlet -IndexController(/) has started !");
-        modelAndView.setViewName("11111");
-        return modelAndView;
-    }
 
     @RequestMapping(value = "/")
     public ModelAndView getIndexSlash() {
@@ -171,6 +163,16 @@ public class LoginController {
         return model;
 
     }
+
+    //TODO link 111
+    @RequestMapping(value = "/111")
+    public ModelAndView get111() {
+        ModelAndView modelAndView = new ModelAndView();
+        log.info("class LoginServlet -IndexController(/) has started !");
+        modelAndView.setViewName("11111");
+        return modelAndView;
+    }
+
     /*@RequestMapping(value = "editUserDataPage", method = RequestMethod.POST)
     public ModelAndView doUserEditDataPage(
             @Validated

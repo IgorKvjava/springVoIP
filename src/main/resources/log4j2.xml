@@ -27,10 +27,10 @@
 <Configuration>
     <!-- Properties section -->
     <Properties>
-        <Property name="web_log">/home/igor/IdeaProjects/springVoIP/logs/web.log</Property>
-        <Property name="core_log">/home/igor/IdeaProjects/springVoIP/logs/core.log</Property>
-        <Property name="model_log">/home/igor/IdeaProjects/springVoIP/logs/model.log</Property>
-        <Property name="hibernate_log">/home/igor/IdeaProjects/springVoIP/logs/hibernate.log</Property>
+        <Property name="web_log">>${project.basedir}/logs/web.log</Property>
+        <Property name="core_log">${project.basedir}/logs/core.log</Property>
+        <Property name="model_log">${project.basedir}/logs/model.log</Property>
+        <Property name="hibernate_log">${project.basedir}/logs/hibernate.log</Property>
     </Properties>
 
     <!-- Appenders section -->

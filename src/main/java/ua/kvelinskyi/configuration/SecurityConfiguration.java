@@ -34,8 +34,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         httpSecurity.authorizeRequests()
                .antMatchers("/index", "/", "/error").permitAll()
                 .antMatchers("/zzz").permitAll()
-                .antMatchers("/admin/**", "/mainUserPage/**",
-                        "/userUpdateData").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/user/**").access("hasRole('ROLE_USER')")
                // .antMatchers("/console/**").permitAll()
                 .and().formLogin()
@@ -80,7 +79,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         auth.inMemoryAuthentication()
                 .withUser("user1").password("1").roles("USER")
                 .and()
-                .withUser("admin").password("$2a$10$F3N38T.RB8OQXUUUxAMMh.xBLbFeHQ3iNxDym8yUGsQOmFrE2FLqC").roles("ADMIN");
+                .withUser("admin").password("1").roles("ADMIN");
     }*/
 
 }
