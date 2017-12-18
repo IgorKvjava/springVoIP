@@ -28,4 +28,9 @@ public class Form39ServiceImpl implements Form39Service {
     public List<Form39> dataForm39ByTimeIntervalAndIdDoc(Date dateStart, Date dateEnd, Integer idDoc) {
         return form39Repository.findByDateNowBetweenAndIdDoctorOrderByNumDay(dateStart, dateEnd, idDoc);
     }
+
+    @Override
+    public List<Form39> dataForm39ByTimeInterval(Date dateStart, Date dateEnd) {
+        return form39Repository.findByDateNowBetween(dateStart, dateEnd);
+    }
 }

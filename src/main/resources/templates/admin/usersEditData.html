@@ -14,23 +14,24 @@
                 <tr>
                     <th>Id</th>
                     <th>Login</th>
-                    <th>Password</th>
                     <th>Name</th>
+                    <th>Спеціальність</th>
+                    <th>Кабінет</th>
                     <th>Enabled</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
                 <tr th:each="user : ${listAllUsers}">
-                    <td th:text="${user.id}"><a href="/phoneBook/${user.id}">Id</a></td>
+                    <td th:text="${user.id}">User id</td>
                     <td th:text="${user.login}">User login</td>
-                    <td th:text="${user.password}">User password</td>
                     <td th:text="${user.userName}">User name</td>
+                    <td th:text="${user.informationDoctor.specialtyOfDoctor}">specialty Of Doctor</td>
+                    <td th:text="${user.informationDoctor.room}">room</td>
                     <td th:text="${user.enabled}">User enabled</td>
                     <td><a th:href="${ '/admin/user/edit/' + user.id}">Edit</a></td>
-                    <td><a th:href="${'/admin/user/delete/' + user.id}">Delete</a></td>
+                    <td><a th:href="${'/admin/user/onOff/' + user.id}">Активувати(Деактивувати)</a></td>
                 </tr>
             </table>
-            <a href="#" th:href="@{/logout}">Вихід</a>
         </div>
     </div>
 </div>

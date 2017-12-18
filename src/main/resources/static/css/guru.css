@@ -47,9 +47,19 @@ td {
     border: 1px solid black;
     border-collapse: collapse;
 }
-TR.even {
-    background: #FFA500; /* Цвет фона  строк */
+
+th {
+    vertical-align: center;
+    text-align: center;
 }
+tr.even {
+    background: #FFA500; /* Цвет фона  строк */
+
+}
+th.eventh{
+    border: 1px solid black;
+}
+
 .vert-text{
     -ms-transform: rotate(90deg);
     -moz-transform: rotate(90deg);
@@ -61,10 +71,10 @@ TR.even {
     -webkit-transform-origin: left top 0;
     transform-origin: left top 0;
 
-    margin-left: 30px;
+    margin-left: 47px;
     padding: 0;
     float: left;
-    height:80px;
+    height:280px;
     width:5px;
     white-space: nowrap;
 }

@@ -7,4 +7,6 @@ public interface InformationDoctorService {
 
     InformationDoctor addInformationDoctor (InformationDoctor informationDoctor);
     List<InformationDoctor> getAll();
+
+    InformationDoctor editInformationDoctor(InformationDoctor informationDoctor);
 }

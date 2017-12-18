@@ -10,4 +10,5 @@ public interface Form39Service {
     Form39 addForm39(Form39 form39);
     List<Form39> dateNowIsPresent(Date date, Integer idDoc);
     List<Form39> dataForm39ByTimeIntervalAndIdDoc(Date dateStart, Date dateEnd, Integer idDoc);
+    List<Form39> dataForm39ByTimeInterval(Date dateStart, Date dateEnd);
 }

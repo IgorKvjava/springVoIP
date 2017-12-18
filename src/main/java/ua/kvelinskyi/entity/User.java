@@ -22,8 +22,9 @@ public class User {
     public User() {
     }
 
-    public User(String login, String password, String userName, String enabled, List<Form39> form39List,
-                List<PhoneBook> phoneBookList, int role) {
+    public User(String login, String password, String userName, String enabled,
+                List<Form39> form39List, List<PhoneBook> phoneBookList, int role,
+                InformationDoctor informationDoctor) {
         this.login = login;
         this.password = password;
         this.userName = userName;
@@ -31,6 +32,7 @@ public class User {
         this.form39List = form39List;
         this.phoneBookList = phoneBookList;
         this.role = role;
+        this.informationDoctor = informationDoctor;
     }
 
     @Id
@@ -113,7 +115,7 @@ public class User {
         this.phoneBookList = phoneBookList;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "information_doctor_id")
     public InformationDoctor getInformationDoctor() {
         return informationDoctor;

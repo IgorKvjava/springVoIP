@@ -2,7 +2,6 @@ package ua.kvelinskyi.controllers;
 
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
@@ -10,8 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ua.kvelinskyi.entity.User;
 import ua.kvelinskyi.service.impl.UserServiceImpl;
+
 import java.security.Principal;
-import java.util.List;
 
 @RestController
 public class LoginController {
@@ -66,16 +65,6 @@ public class LoginController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/admin/usersEditData")
-    public ModelAndView getMainUserPage(Authentication loggedUser) {
-        ModelAndView mod = new ModelAndView();
-                log.info("class LoginController - RequestMapping - mainPageUser ADMIN");
-                List<User> listAllUsers = userServiceImpl.getAll();
-                mod.addObject("listAllUsers", listAllUsers);
-                mod.setViewName("/admin/usersEditData");
-        return mod;
-    }
-
     @RequestMapping(value = "/signUp", method = RequestMethod.GET)
     public ModelAndView getRegistrationPage() {
        // User user = new User();
@@ -128,19 +117,16 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/userUpdateData")
-    public ModelAndView doUserEditData(@RequestParam("password") String password,
-                                       @RequestParam("userName") String userName,
-                                       @RequestParam("enabled") String enabled,
+    public ModelAndView doUserEditData(@RequestParam("userName") String userName,
                                        @Validated
                                                User user) {
         ModelAndView mod = new ModelAndView();
-
-        if (!password.equals("0")){
+       /* if (!password.equals("0")){
             String cryptedPassword = new BCryptPasswordEncoder().encode(password);
             user.setPassword(cryptedPassword);
-        }
+        }*/
+        log.info("class LoginController - doUserEditData,  user id = " + user.getId());
         user.setUserName(userName);
-        user.setEnabled(enabled);
         user = userServiceImpl.editUser(user);
         mod.addObject("user", user);
         mod.setViewName("/user/userEditDataPage");

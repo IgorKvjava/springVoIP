@@ -23,4 +23,11 @@ public class InformationDoctorServiceImpl implements InformationDoctorService{
     public List<InformationDoctor> getAll() {
         return informationDoctorRepository.findAll();
     }
+
+    @Override
+    public InformationDoctor editInformationDoctor(InformationDoctor informationDoctor) {
+        return informationDoctorRepository.saveAndFlush(informationDoctor);
+    }
+
+
 }

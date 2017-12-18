@@ -9,25 +9,55 @@
     <th:block th:include="fragments/header :: header"></th:block>
     <div class="jumbotron">
         <div th:if="${not #lists.isEmpty(form39List)}">
-            <form>
                 <div class="table-responsive">
                     <table class="table table-border">
-                        <tr>
-                            <th><div class="vert-text">Adfgfggdfg</div></th>
-                            <th>1</th>
-                            <th>2</th>
-                            <th>3</th>
-                            <th>4</th>
-                            <th>5</th>
-                            <th>6</th>
-                            <th>7</th>
-                            <th>8</th>
-                            <th>9</th>
-                            <th>10</th>
-                            <th>11</th>
-                            <th>12</th>
-                            <th>13</th>
-                            <th>14</th>
+                        <tr bgcolor="#A9A9A9">
+                            <th class="eventh" > </th>
+                            <th class="eventh" > </th>
+                            <th class="eventh" > </th>
+                            <th class="eventh" colspan="2">Кількість відвіду-<br/>вань дітей віком<br/>0–17років включ-<br/>но (із графи 1)</th>
+                            <th class="eventh" colspan="2">Кількість відвідувань з<br/>приводу захворювань (із графи 1)</th>
+                            <th class="eventh" ></th>
+                            <th class="eventh" ></th>
+                            <th class="eventh" colspan="4">Кількість відвідувань<br/>дітей віком 0–17 років<br/>включно з приводу за-<br/>
+                                хворювань (із графи 9)</th>
+                            <th class="eventh" > </th>
+                            <th class="eventh" > </th>
+                        </tr>
+                        <tr bgcolor="#A9A9A9">
+                            <th class="eventh"><div class="vert-text">Числа місяця</div></th>
+                            <th class="eventh"><div class="vert-text">Кількість відвідувань, усього</div></th>
+                            <th class="eventh"><div class="vert-text">З них сільських жителів</div></th>
+                            <th class="eventh"><div class="vert-text">усього</div></th>
+                            <th class="eventh"><div class="vert-text">з них сільських жителів</div></th>
+                            <th class="eventh"><div class="vert-text">дорослих (18 років і старше)</div></th>
+                            <th class="eventh"><div class="vert-text">з них сільських жителів</div></th>
+                            <th class="eventh"><div class="vert-text">дітей віком  0–17 років включно</div></th>
+                            <th class="eventh"><div class="vert-text">з них сільських жителів</div></th>
+                            <th class="eventh"><div class="vert-text">Кількість відвідувань вдома, усього</div></th>
+                            <th class="eventh"><div class="vert-text">З них сільських жителів</div></th>
+                            <th class="eventh"><div class="vert-text">усього</div></th>
+                            <th class="eventh"><div class="vert-text">з них сільських жителів</div></th>
+                            <th class="eventh"><div class="vert-text">Кількість профілактичних і патронажних<br/>відвідувань
+                                дітей віком 0–17 років<br/>включно (із графи 9)</div></th>
+                            <th class="eventh"><div class="vert-text">З них сільських жителів</div></th>
+                        </tr>
+                        <tr bgcolor="#A9A9A9">
+                            <th class="eventh">A</th>
+                            <th class="eventh">1</th>
+                            <th class="eventh">2</th>
+                            <th class="eventh">3</th>
+                            <th class="eventh">4</th>
+                            <th class="eventh">5</th>
+                            <th class="eventh">6</th>
+                            <th class="eventh">7</th>
+                            <th class="eventh">8</th>
+                            <th class="eventh">9</th>
+                            <th class="eventh">10</th>
+                            <th class="eventh">11</th>
+                            <th class="eventh">12</th>
+                            <th class="eventh">13</th>
+                            <th class="eventh">14</th>
                         </tr>
                         <tr th:each="form39 : ${form39List}">
                             <td th:text="${form39.numDay}"></td>
@@ -46,12 +76,27 @@
                             <td th:text="${form39.childrenPatronage}"></td>
                             <td th:text="${form39.childrenPatronageVillagers}"></td>
                         </tr>
+                        <div th:if="${sumForms39} != null">
+                            <tr class="even">
+                                <td th:text="Сума"></td>
+                                <td th:text="${sumForms39.numberVisitsAll}"></td>
+                                <td th:text="${sumForms39.ofVillagers}"></td>
+                                <td th:text="${sumForms39.childrenVisitsAll}"></td>
+                                <td th:text="${sumForms39.childrenVisitsVillagers}"></td>
+                                <td th:text="${sumForms39.adultsVisitsDisease}"></td>
+                                <td th:text="${sumForms39.adultsVisitsDiseaseVillagers}"></td>
+                                <td th:text="${sumForms39.childrenVisitsDisease}"></td>
+                                <td th:text="${sumForms39.childrenVisitsDiseaseVillagers}"></td>
+                                <td th:text="${sumForms39.visitsHomeAll}"></td>
+                                <td th:text="${sumForms39.visitsHomeVillagers}"></td>
+                                <td th:text="${sumForms39.childrenVisitsHomeAll}"></td>
+                                <td th:text="${sumForms39.childrenVisitsHomeVillagers}"></td>
+                                <td th:text="${sumForms39.childrenPatronage}"></td>
+                                <td th:text="${sumForms39.childrenPatronageVillagers}"></td>
+                            </tr>
+                        </div>
                     </table>
                 </div>
-                <div class="row">
-                    <button type="submit" class="btn btn-success">Submit</button>
-                </div>
-            </form>
         </div>
         <form th:action="@{/admin/form39Data/timeInterval}">
             <div>
