@@ -14,6 +14,20 @@ public class ControllerHelper {
 
     public Form39 sumForms39Entity (List<Form39> listForm39){
         /*Form39 sumForms39 = new Form39();*/
+        sumForms39.setNumberVisitsAll(0);
+        sumForms39.setAdultsVisitsDisease(0);
+        sumForms39.setAdultsVisitsDiseaseVillagers(0);
+        sumForms39.setChildrenPatronage(0);
+        sumForms39.setChildrenPatronageVillagers(0);
+        sumForms39.setChildrenVisitsAll(0);
+        sumForms39.setChildrenVisitsDisease(0);
+        sumForms39.setChildrenVisitsDiseaseVillagers(0);
+        sumForms39.setChildrenVisitsHomeAll(0);
+        sumForms39.setChildrenVisitsHomeVillagers(0);
+        sumForms39.setChildrenVisitsVillagers(0);
+        sumForms39.setOfVillagers(0);
+        sumForms39.setVisitsHomeAll(0);
+        sumForms39.setVisitsHomeVillagers(0);
         for(Form39 form39 : listForm39){
             sumForms39.setNumberVisitsAll(sumForms39.getNumberVisitsAll()+form39.getNumberVisitsAll());
             sumForms39.setAdultsVisitsDisease(sumForms39.getAdultsVisitsDisease()+form39.getAdultsVisitsDisease());
